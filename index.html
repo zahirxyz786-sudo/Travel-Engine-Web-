@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorldExplorer | Explore Your Amazing Destination</title>
+    
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Font: Inter (Modern Sans-Serif, excellent readability) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Configure Tailwind for custom colors and fonts -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'accent-red': '#FF5555',  /* Vibrant Warm Red (CTA/Accent) */
+                        'primary-white': '#FFFFFF', /* Clean White (Background) */
+                        'text-dark': '#333333',   /* Dark Text */
+                        'text-gray': '#6B7280',   /* Subtle Gray Text */
+                        'bg-light': '#F8F9FA',    /* Very Light Gray */
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'xl-red': '0 10px 15px -3px rgba(255, 85, 85, 0.3), 0 4px 6px -2px rgba(255, 85, 85, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Ensures the background image is static and covers the hero area */
+        .hero-bg {
+            /* Using the specified Unsplash URL */
+            background-image: url('https://images.unsplash.com/photo-1640169559166-e411cb0a4981?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1174');
+            background-size: cover;
+            background-position: center;
+            height: 90vh; /* Set a fixed height for the dramatic hero effect */
+        }
+        
+        /* Custom style for the category hover effect */
+        .category-tab {
+            transition: all 0.2s ease-in-out;
+            border: 1px solid #ddd;
+            color: #333333;
+        }
+        .category-tab:hover {
+            border-color: #FF5555;
+            color: #FF5555;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Icon styling to match the line-art red accent */
+        .feature-icon {
+            color: #FF5555;
+            width: 5rem; 
+            height: 5rem;
+        }
+    </style>
+</head>
+<body class="bg-primary-white font-sans text-text-dark min-h-screen">
+
+    <!-- 1. Navigation Header -->
+    <header class="bg-primary-white border-b border-gray-100 shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Platform Name -->
+            <a href="#" class="text-3xl font-black text-text-dark">
+                Travel<span class="text-accent-red">Engine.</span>
+            </a>
+            
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold">
+                <a href="#" class="text-accent-red hover:text-text-dark transition duration-200">Home</a>
+                <a href="#about" class="text-text-dark hover:text-accent-red transition duration-200">About</a>
+                <a href="#tours" class="text-text-dark hover:text-accent-red transition duration-200">Tours</a>
+                <a href="#hotels" class="text-text-dark hover:text-accent-red transition duration-200">Hotels</a>
+                <a href="#blog" class="text-text-dark hover:text-accent-red transition duration-200">Blog</a>
+                <a href="#contact" class="text-text-dark hover:text-accent-red transition duration-200">Contact</a>
+                
+                <!-- Prominent "Add Listing" button -->
+                <a href="#" class="bg-accent-red text-primary-white py-2 px-4 rounded-lg font-bold hover:bg-red-700 transition duration-300 shadow-md">
+                    Add Listing
+                </a>
+            </nav>
+             <!-- Mobile Menu Icon -->
+            <button class="md:hidden text-text-dark focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        
+        <!-- 2. Hero Section: Full Image Background, Search, and Categories -->
+        <section class="hero-bg relative flex flex-col justify-center pt-24 pb-48 text-primary-white">
+            
+            <!-- Dark Overlay for Readability -->
+            <div class="absolute inset-0 bg-black/30"></div>
+            
+            <!-- Hero Content Container -->
+            <div class="relative max-w-5xl mx-auto px-6 z-10 w-full">
+                
+                <!-- Headline & Subtitle -->
+                <h1 class="text-6xl md:text-7xl font-extrabold mb-2 leading-tight drop-shadow-lg">
+                    Explore your amazing destination
+                </h1>
+                <p class="text-xl font-light mb-8 drop-shadow-md">
+                    Find great places to stay, eat, shop, or visit from local experts.
+                </p>
+                
+                <!-- Large Search Bar Component -->
+                <div class="flex flex-col md:flex-row bg-primary-white rounded-xl shadow-2xl p-2 space-y-2 md:space-y-0 md:space-x-2">
+                    <!-- Input 1: Keyword Search -->
+                    <input type="text" placeholder="Ex: food, service, hotel" class="flex-1 p-4 rounded-lg text-text-dark focus:ring-accent-red focus:border-accent-red border-gray-200" required>
+                    
+                    <!-- Input 2: Location -->
+                    <input type="text" placeholder="Where (Location)" class="flex-1 p-4 rounded-lg text-text-dark focus:ring-accent-red focus:border-accent-red border-gray-200" required>
+                    
+                    <!-- Input 3: Search Button -->
+                    <button type="button" class="bg-accent-red text-primary-white py-4 px-8 rounded-xl font-bold uppercase hover:bg-red-700 transition duration-300 shadow-lg hover:shadow-xl-red">
+                        Search
+                    </button>
+                </div>
+                
+                <!-- Category Highlight Buttons -->
+                <div class="mt-8 flex flex-wrap gap-4 text-sm font-semibold">
+                    <p class="mr-2 text-primary-white font-medium drop-shadow-sm">Or browse these highlights:</p>
+                    
+                    <!-- Restaurant Tab -->
+                    <button class="category-tab bg-primary-white py-2 px-4 rounded-full flex items-center shadow-md hover:text-accent-red">
+                        <svg class="w-5 h-5 mr-1 text-accent-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                        Restaurant
+                    </button>
+                    <!-- Hotel Tab -->
+                    <button class="category-tab bg-primary-white py-2 px-4 rounded-full flex items-center shadow-md hover:text-accent-red">
+                        <svg class="w-5 h-5 mr-1 text-accent-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-9 3h9"></path></svg>
+                        Hotel
+                    </button>
+                    <!-- Places Tab -->
+                    <button class="category-tab bg-primary-white py-2 px-4 rounded-full flex items-center shadow-md hover:text-accent-red">
+                        <svg class="w-5 h-5 mr-1 text-accent-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        Places
+                    </button>
+                    <!-- Shopping Tab -->
+                    <button class="category-tab bg-primary-white py-2 px-4 rounded-full flex items-center shadow-md hover:text-accent-red">
+                        <svg class="w-5 h-5 mr-1 text-accent-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                        Shopping
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Features Section: Four-Column Grid -->
+        <section class="py-16 bg-primary-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid md:grid-cols-4 gap-8 text-center">
+                    
+                    <!-- Feature 1: Best Price Guarantee -->
+                    <div class="p-4 rounded-lg">
+                        <div class="flex justify-center mb-4">
+                            <!-- Icon for Price Guarantee (Badge Check) -->
+                            <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.65 6.35c-1.373 1.373-3.414 2.14-5.65 2.14-2.237 0-4.277-.767-5.65-2.14-1.373-1.373-2.14-3.414-2.14-5.65 0-2.237.767-4.277 2.14-5.65C7.723 3.41 9.763 2.64 12 2.64c2.237 0 4.277.77 5.65 2.14 1.373 1.373 2.14 3.413 2.14 5.65 0 2.237-.767 4.277-2.14 5.65z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-text-dark mb-2">Best Price Guarantee</h3>
+                        <p class="text-text-gray text-sm">We ensure you get the best market rates for all listed hotels and tours, verified daily by our team.</p>
+                    </div>
+                    
+                    <!-- Feature 2: Travellers Love Us -->
+                    <div class="p-4 rounded-lg">
+                        <div class="flex justify-center mb-4">
+                            <!-- Icon for Love (Heart) -->
+                            <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-.318-.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-text-dark mb-2">Travellers Love Us</h3>
+                        <p class="text-text-gray text-sm">Trusted by millions of adventurers worldwide, our platform offers authentic, user-reviewed experiences.</p>
+                    </div>
+
+                    <!-- Feature 3: Best Travel Agent -->
+                    <div class="p-4 rounded-lg">
+                        <div class="flex justify-center mb-4">
+                            <!-- Icon for Agent (User Briefcase) -->
+                            <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.5 23.5 0 0112 15c-3.18 0-6.248-.54-9-1.745M19 21v-5a2 2 0 00-2-2H7a2 2 0 00-2 2v5M8 7v.01M16 7v.01M10 17h4"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-text-dark mb-2">Best Travel Agent</h3>
+                        <p class="text-text-gray text-sm">Access to certified local guides and exclusive deals you won't find on standard booking platforms.</p>
+                    </div>
+
+                    <!-- Feature 4: Dedicated Support -->
+                    <div class="p-4 rounded-lg">
+                        <div class="flex justify-center mb-4">
+                            <!-- Icon for Support (Headset) -->
+                            <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm1 0a1 1 0 00-1 1v7m17-7a1 1 0 011 1v7m-1 7h-2m-4 0h-4m-4 0H5"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-text-dark mb-2">Our Dedicated Support</h3>
+                        <p class="text-text-gray text-sm">24/7 assistance before, during, and after your trip, ensuring a worry-free travel experience.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 4. Popular Destinations Section -->
+        <section id="tours" class="py-20 bg-bg-light">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="text-4xl font-extrabold text-text-dark mb-10 text-center">Popular Destinations</h2>
+                
+                <div class="grid md:grid-cols-4 gap-6">
+                    <!-- Destination Card 1 -->
+                    <div class="bg-primary-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+                        <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1120" alt="Eiffel Tower, Paris" class="w-full h-40 object-cover opacity-90 hover:opacity-100 transition duration-500">
+                        <div class="p-4">
+                            <h3 class="text-xl font-bold text-text-dark">Paris, France</h3>
+                            <p class="text-text-gray text-sm mt-1">1,200+ Listings | 54 Tours</p>
+                        </div>
+                    </div>
+
+                    <!-- Destination Card 2 -->
+                    <div class="bg-primary-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+                        <img src="https://images.unsplash.com/photo-1732871351320-db418d43e5aa?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170" alt="Ancient Temple, Kyoto" class="w-full h-40 object-cover opacity-90 hover:opacity-100 transition duration-500">
+                        <div class="p-4">
+                            <h3 class="text-xl font-bold text-text-dark">Kyoto, Japan</h3>
+                            <p class="text-text-gray text-sm mt-1">850+ Listings | 32 Tours</p>
+                        </div>
+                    </div>
+
+                    <!-- Destination Card 3 -->
+                    <div class="bg-primary-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+                        <img src="https://images.unsplash.com/photo-1618243539083-50d8840e122f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170" alt="New York City Skyline" class="w-full h-40 object-cover opacity-90 hover:opacity-100 transition duration-500">
+                        <div class="p-4">
+                            <h3 class="text-xl font-bold text-text-dark">New York City, USA</h3>
+                            <p class="text-text-gray text-sm mt-1">2,100+ Listings | 98 Tours</p>
+                        </div>
+                    </div>
+
+                    <!-- Destination Card 4 -->
+                    <div class="bg-primary-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+                        <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170" alt="Tropical Beach" class="w-full h-40 object-cover opacity-90 hover:opacity-100 transition duration-500">
+                        <div class="p-4">
+                            <h3 class="text-xl font-bold text-text-dark">Bali, Indonesia</h3>
+                            <p class="text-text-gray text-sm mt-1">1,500+ Listings | 67 Tours</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Featured Listings Section -->
+        <section id="hotels" class="py-20 bg-primary-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="text-4xl font-extrabold text-text-dark mb-10 text-center">Featured Listings</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    
+                    <!-- Listing Card 1: Hotel -->
+                    <div class="bg-primary-white border border-gray-100 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+                        <img src="https://images.unsplash.com/photo-1617096346877-67cc453838ce?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1074" alt="Luxury Hotel Suite" class="w-full h-56 object-cover">
+                        <div class="p-5">
+                            <span class="text-xs font-semibold text-accent-red uppercase tracking-wider">Hotel</span>
+                            <h3 class="text-2xl font-bold text-text-dark mt-1 mb-2">The Grand Marina Hotel</h3>
+                            <p class="text-text-gray text-sm">A five-star experience with exclusive waterfront access in the city center.</p>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="text-lg font-bold text-text-dark">$350 / night</span>
+                                <a href="#" class="text-accent-red font-semibold hover:text-red-700 transition">View Details &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Listing Card 2: Tour -->
+                    <div class="bg-primary-white border border-gray-100 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+                        <img src="https://images.unsplash.com/photo-1655562546244-f54950d0858a?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1286" alt="Local Cooking Class" class="w-full h-56 object-cover">
+                        <div class="p-5">
+                            <span class="text-xs font-semibold text-accent-red uppercase tracking-wider">Tour</span>
+                            <h3 class="text-2xl font-bold text-text-dark mt-1 mb-2">Authentic Street Food Tour</h3>
+                            <p class="text-text-gray text-sm">Explore hidden gems and taste the best local dishes with an expert guide.</p>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="text-lg font-bold text-text-dark">$75 / person</span>
+                                <a href="#" class="text-accent-red font-semibold hover:text-red-700 transition">Book Now &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Listing Card 3: Place / Attraction -->
+                    <div class="bg-primary-white border border-gray-100 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+                        <img src="https://images.unsplash.com/photo-1743119638006-a01d4625745d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170" alt="Modern Art Museum" class="w-full h-56 object-cover">
+                        <div class="p-5">
+                            <span class="text-xs font-semibold text-accent-red uppercase tracking-wider">Place</span>
+                            <h3 class="text-2xl font-bold text-text-dark mt-1 mb-2">The Metro Art Gallery</h3>
+                            <p class="text-text-gray text-sm">Discover the city's premier collection of modern and contemporary art.</p>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="text-lg font-bold text-text-dark">Free Entry</span>
+                                <a href="#" class="text-accent-red font-semibold hover:text-red-700 transition">Visit Website &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-bg-light border-t border-gray-200 py-10">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-text-gray text-sm">&copy; 2025 WorldExplorer. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
